@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+.logo {
+    width: 60%;
+    height: auto;
+}
+
+.login {
+    display: grid;
+    place-items: center;
+
+    height: 100vh;
+    background-color: black;
+}
+
+.login > a {
+    padding: 20px;
+    background-color: #1db954;
+    border-radius: 99px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none; /* prevent underline from <a> */
+    font-family: 'Montserrat', sans-serif;
+}
