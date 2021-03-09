@@ -4,7 +4,8 @@ export const initialState = {
   playlists: [],
   playing: null,
   item: null,
-  discoverWeekly: null,
+  firstPlaylist: null,
+  lastPlayedTrack: null
 };
 
 const reducer = (state, action) => {
@@ -26,10 +27,15 @@ const reducer = (state, action) => {
         ...state,
         playlists: action.playlists,
       };
-    case "SET_DISCOVER_WEEKLY":
+    case "SET_FIRST_PLAYLIST":
       return {
         ...state,
-        discoverWeekly: action.discoverWeekly,
+        firstPlaylist: action.firstPlaylist,
+      };
+    case "SET_LAST_PLAYED_TRACK":
+      return {
+        ...state,
+        lastPlayedTrack: action.lastPlayedTrack,
       };
     default:
       console.log("nothing");

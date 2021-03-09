@@ -6,6 +6,9 @@ The base project came from https://github.com/CleverProgrammers/spotify-clone.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Todo: 
+- convert project to Typescript
+
 ## Available Scripts
 
 In the project directory, you can run:

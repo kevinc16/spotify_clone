@@ -1,5 +1,6 @@
 import React from "react";
 import "./css/Footer.css";
+import { useDataLayerValue } from "./DataLayerProvider";
 
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
@@ -11,16 +12,22 @@ import { Grid, Slider } from "@material-ui/core";
 import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
 import VolumeDownIcon from "@material-ui/icons/VolumeUp";
 
+// to play the song - https://developer.spotify.com/documentation/web-playback-sdk/quick-start/
+
 function Footer() {
+  const [{ lastPlayedTrack }, dispatch] = useDataLayerValue();
+
   return (
     <div className="footer">
-      <div className="footer__left">
-        <img src="" alt="" className="footer__albumLogo"/>
-        <div className="footer__songInfo">
-          <h4>asdsa</h4>
-          <p>asd</p>
+      {lastPlayedTrack && (
+        <div className="footer__left">
+          <img src={lastPlayedTrack.album.images[0].url} alt="" className="footer__albumLogo" />
+          <div className="footer__songInfo">
+            <h4>{lastPlayedTrack.name}</h4>
+            <p>{lastPlayedTrack.artists.map((artist) => artist.name).join(", ")}</p>
+          </div>
         </div>
-      </div>
+      )}
       <div className="footer__center">
         <ShuffleIcon className="footer__green" />
         <SkipPreviousIcon className="footer__icon" />
@@ -37,7 +44,7 @@ function Footer() {
             <VolumeDownIcon />
           </Grid>
           <Grid item xs>
-            <Slider className="footer__volumeSlider"/>
+            <Slider className="footer__volumeSlider" />
           </Grid>
         </Grid>
       </div>

@@ -12,7 +12,7 @@ import { useDataLayerValue } from "./DataLayerProvider";
 // playlists is dynamic
 // able to play songs
 
-const spotify = new SpotifyWebApi(); // main api object
+export const spotify = new SpotifyWebApi(); // main api object
 
 function App() {
   const [{ token }, dispatch] = useDataLayerValue();
@@ -22,6 +22,7 @@ function App() {
     const _token = getTokenFromUrl();
     window.location.hash = "";
 
+    // we initialize everything here
     if (_token) {
       spotify.setAccessToken(_token);
       dispatch({ type: "SET_TOKEN", token: _token });
@@ -32,11 +33,17 @@ function App() {
 
       spotify.getUserPlaylists().then((playlists) => {
         dispatch({ type: "SET_PLAYLISTS", playlists });
+        const firstPlaylistID = playlists.items[0].id;
+        // get info of the playlist
+        spotify.getPlaylist(firstPlaylistID).then((playlist) => {
+          dispatch({ type: "SET_FIRST_PLAYLIST", firstPlaylist: playlist });
+        });
       });
 
-      spotify.getPlaylist("37i9dQZEVXcQ0ftIaSbsxN").then((discoverWeekly) => {
-        console.log("asd", discoverWeekly);
-        dispatch({ type: "SET_DISCOVER_WEEKLY", discoverWeekly });
+      spotify.getMyRecentlyPlayedTracks().then((listOfTracks) => {
+        const lastTrack = listOfTracks.items[0].track;
+        console.log(lastTrack);
+        dispatch({ type: "SET_LAST_PLAYED_TRACK", lastPlayedTrack: lastTrack });
       });
     }
   }, []);

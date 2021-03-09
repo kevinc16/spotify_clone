@@ -10,35 +10,37 @@ import SongRow from "./SongRow";
 import { useDataLayerValue } from "./DataLayerProvider";
 
 function Body() {
-  const [{ discoverWeekly }, dispatch] = useDataLayerValue();
+  const [{ firstPlaylist }, dispatch] = useDataLayerValue();
 
-  console.log("body", discoverWeekly);
+  // console.log("body", firstPlaylist);
 
   return (
-    discoverWeekly && (
-      <div className="body">
-        <Header />
-        <div className="body__info">
-          <img src={discoverWeekly.images[0]?.url} alt="discoverweekly"/>
-          <div className="body__infoText">
-            <strong>PLAYLIST</strong>
-            <h2>{discoverWeekly.name}</h2>
-            <p>{discoverWeekly.description}</p>
+    <div className="body">
+      <Header />
+      {firstPlaylist && (
+        <>
+          <div className="body__info">
+            <img src={firstPlaylist.images[0]?.url} alt="discoverweekly" />
+            <div className="body__infoText">
+              <strong>PLAYLIST</strong>
+              <h2>{firstPlaylist.name}</h2>
+              <p>{firstPlaylist.description}</p>
+            </div>
           </div>
-        </div>
-        <div className="body__songs">
-          <div className="body__icons">
-            <PlayCircleFilledIcon className="body__shuffle" />
-            <FavoriteIcon />
-            <MoreHorizIcon />
+          <div className="body__songs">
+            <div className="body__icons">
+              <PlayCircleFilledIcon className="body__shuffle" />
+              <FavoriteIcon />
+              <MoreHorizIcon />
+            </div>
+            {/* list of songs */}
+            {firstPlaylist.tracks.items.map((item) => {
+              return <SongRow track={item.track} key={item.track.id} />;
+            })}
           </div>
-          {/* list of songs */}
-          {discoverWeekly.tracks.items.map((item) => {
-            return <SongRow track={item.track} key={item.track.id} />;
-          })}
-        </div>
-      </div>
-    )
+        </>
+      )}
+    </div>
   );
 }
 

@@ -1,6 +1,7 @@
 import React from "react";
 import "./css/Sidebar.css";
 import SidebarOption from "./SidebarOption";
+import { spotify } from "./App";
 
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
@@ -10,6 +11,12 @@ import { useDataLayerValue } from "./DataLayerProvider";
 
 function Sidebar() {
   const [{ playlists }, dispatch] = useDataLayerValue();
+
+  const changePlayList = (e, playlistID) => {
+    spotify.getPlaylist(playlistID).then((playlist) => {
+      dispatch({ type: "SET_FIRST_PLAYLIST", firstPlaylist: playlist });
+    });
+  };
 
   return (
     <div className="sidebar">
@@ -29,7 +36,13 @@ function Sidebar() {
       {/* for each playlist */}
       {/* a?.b === a && a.b */}
       {playlists?.items?.map((playlist) => {
-        return <SidebarOption title={playlist.name} key={playlist.id} />;
+        return (
+          <SidebarOption
+            title={playlist.name}
+            key={playlist.id}
+            onClickHandler={(e) => changePlayList(e, playlist.id)}
+          />
+        );
       })}
     </div>
   );

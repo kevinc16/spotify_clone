@@ -1,9 +1,11 @@
 import React from "react";
 import "./css/Login.css";
 
-import { loginUrl } from "./spotify";
+import { loginUrl, redirectUri } from "./spotify";
 
 function Login() {
+  console.log(redirectUri);
+
   return (
     <div className="login">
       <img
