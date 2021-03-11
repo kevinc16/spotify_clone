@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import "./css/Sidebar.css";
 import SidebarOption from "./SidebarOption";
 import { spotify } from "./App";
@@ -10,9 +10,10 @@ import LibraryMusicIcon from "@material-ui/icons/LibraryMusic";
 import { useDataLayerValue } from "./DataLayerProvider";
 
 function Sidebar() {
-  const [{ playlists }, dispatch] = useDataLayerValue();
+  const { state, dispatch } = useDataLayerValue();
+  const playlists = state.playlists;
 
-  const changePlayList = (e, playlistID) => {
+  const changePlayList = (playlistID: string) => {
     spotify.getPlaylist(playlistID).then((playlist) => {
       dispatch({ type: "SET_FIRST_PLAYLIST", firstPlaylist: playlist });
     });
@@ -40,7 +41,8 @@ function Sidebar() {
           <SidebarOption
             title={playlist.name}
             key={playlist.id}
-            onClickHandler={(e) => changePlayList(e, playlist.id)}
+            playlistID={playlist.id}
+            onClickHandler={changePlayList}
           />
         );
       })}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./css/Body.css";
 import Header from "./Header";
 
@@ -9,10 +9,15 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import SongRow from "./SongRow";
 import { useDataLayerValue } from "./DataLayerProvider";
 
-function Body() {
-  const [{ firstPlaylist }, dispatch] = useDataLayerValue();
+import { headerRefDiv } from "./Header";
 
-  // console.log("body", firstPlaylist);
+function Body() {
+  const { state, dispatch } = useDataLayerValue();
+  const firstPlaylist = state.firstPlaylist;
+
+  useEffect(() => {
+    if (headerRefDiv) headerRefDiv.scrollIntoView();
+  }, [firstPlaylist]);
 
   return (
     <div className="body">

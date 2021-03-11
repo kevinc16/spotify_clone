@@ -15,16 +15,23 @@ import VolumeDownIcon from "@material-ui/icons/VolumeUp";
 // to play the song - https://developer.spotify.com/documentation/web-playback-sdk/quick-start/
 
 function Footer() {
-  const [{ lastPlayedTrack }, dispatch] = useDataLayerValue();
+  const { state, dispatch } = useDataLayerValue();
+  const lastPlayedTrack = state.lastPlayedTrack;
 
   return (
     <div className="footer">
       {lastPlayedTrack && (
         <div className="footer__left">
-          <img src={lastPlayedTrack.album.images[0].url} alt="" className="footer__albumLogo" />
+          <img
+            src={lastPlayedTrack.album.images[0].url} // this definitely has album - so i use any here
+            alt=""
+            className="footer__albumLogo"
+          />
           <div className="footer__songInfo">
             <h4>{lastPlayedTrack.name}</h4>
-            <p>{lastPlayedTrack.artists.map((artist) => artist.name).join(", ")}</p>
+            <p>
+              {lastPlayedTrack.artists.map((artist: any) => artist.name).join(", ")}
+            </p>
           </div>
         </div>
       )}

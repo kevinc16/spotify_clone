@@ -6,18 +6,32 @@ import { Avatar } from "@material-ui/core";
 
 import { useDataLayerValue } from "./DataLayerProvider";
 
+export let headerRefDiv: HTMLDivElement | null = null;
+
 function Header() {
-  const [{ user }, dispatch] = useDataLayerValue();
+  const { state, dispatch } = useDataLayerValue();
+  const user = state.user;
 
   return (
-    <div className="header">
+    <div
+      className="header"
+      ref={(el) => {
+        headerRefDiv = el;
+      }}
+    >
       <div className="header__left">
         <SearchIcon />
         <input type="text" placeholder="Search" />
       </div>
       <div className="header__right">
-        <Avatar src={user?.images[0]?.url} alt={user?.display_name}/>
-        <h4>{user?.display_name}</h4>
+        {user && (
+          <>
+            {user.images && (
+              <Avatar src={user?.images[0]?.url} alt={user?.display_name} />
+            )}
+            <h4>{user?.display_name}</h4>
+          </>
+        )}
       </div>
     </div>
   );

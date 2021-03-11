@@ -3,11 +3,15 @@
 export interface IInitialState {
   token: string;
   user: SpotifyApi.CurrentUsersProfileResponse | null;
-  playlists: SpotifyApi.ListOfUsersPlaylistsResponse | [];
+  playlists: SpotifyApi.ListOfUsersPlaylistsResponse | null;
   playing: null;
   // item: null;
   firstPlaylist: SpotifyApi.SinglePlaylistResponse | null;
-  lastPlayedTrack: SpotifyApi.TrackObjectSimplified | null;
+  // lastPlayedTrack:
+  //   | SpotifyApi.TrackObjectSimplified
+  //   | SpotifyApi.TrackObjectFull
+  //   | null;
+  lastPlayedTrack: any;
 }
 
 interface ISetUser {
@@ -31,7 +35,9 @@ interface ISetFirstPlaylist {
 }
 
 interface ISetLastPlayedTrack {
-  lastPlayedTrack: SpotifyApi.TrackObjectSimplified;
+  lastPlayedTrack:
+    | SpotifyApi.TrackObjectSimplified
+    | SpotifyApi.TrackObjectFull;
   type: "SET_LAST_PLAYED_TRACK";
 }
 
@@ -45,7 +51,7 @@ export type Actions =
 export const initialState: IInitialState = {
   token: "",
   user: null,
-  playlists: [],
+  playlists: null,
   playing: null,
   // item: null,
   firstPlaylist: null,
