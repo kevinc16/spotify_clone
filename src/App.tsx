@@ -15,7 +15,8 @@ import { useDataLayerValue } from "./DataLayerProvider";
 export const spotify = new SpotifyWebApi(); // main api object
 
 function App() {
-  const [{ token }, dispatch] = useDataLayerValue();
+  const { state, dispatch } = useDataLayerValue();
+  const token = state.token;
 
   // runs the first time rendered - gets token after redirect
   useEffect(() => {
