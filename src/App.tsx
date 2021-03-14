@@ -43,7 +43,6 @@ function App() {
 
       spotify.getMyRecentlyPlayedTracks().then((listOfTracks) => {
         const lastTrack = listOfTracks.items[0].track;
-        console.log(lastTrack);
         dispatch({ type: "SET_LAST_PLAYED_TRACK", lastPlayedTrack: lastTrack });
       });
     }

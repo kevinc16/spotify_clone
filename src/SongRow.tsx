@@ -1,13 +1,20 @@
 import "./css/SongRow.css";
+import { useDataLayerValue } from "./DataLayerProvider";
 
 interface ISongRowProps {
   track: any;
 }
 
 function SongRow({ track }: ISongRowProps) {
+  const { state, dispatch } = useDataLayerValue();
+
+  const handleChangeSong = () => {
+    dispatch({ type: "SET_LAST_PLAYED_TRACK", lastPlayedTrack: track });
+  };
+
   return (
     track && (
-      <div className="songRow">
+      <div className="songRow" onClick={handleChangeSong}>
         <img
           src={track.album?.images[0]?.url}
           alt={track.name}

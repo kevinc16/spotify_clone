@@ -1,0 +1,17 @@
+.playbar {
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: space-between; */
+  
+}
+
+.playbar__main {
+  margin: 0 20px;
+  max-width: 500px;
+  color: whitesmoke !important;
+}
+
+.playbar__curTime {
+  color: white;
+  font-size: 8;
+}

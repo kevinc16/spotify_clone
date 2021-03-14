@@ -11,12 +11,13 @@ import RepeatIcon from "@material-ui/icons/Repeat";
 import { Grid, Slider } from "@material-ui/core";
 import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
 import VolumeDownIcon from "@material-ui/icons/VolumeUp";
+import Playbar from "./Playbar";
 
 // to play the song - https://developer.spotify.com/documentation/web-playback-sdk/quick-start/
 
 function Footer() {
   const { state, dispatch } = useDataLayerValue();
-  const lastPlayedTrack = state.lastPlayedTrack;
+  const lastPlayedTrack: SpotifyApi.TrackObjectFull = state.lastPlayedTrack;
 
   return (
     <div className="footer">
@@ -30,17 +31,22 @@ function Footer() {
           <div className="footer__songInfo">
             <h4>{lastPlayedTrack.name}</h4>
             <p>
-              {lastPlayedTrack.artists.map((artist: any) => artist.name).join(", ")}
+              {lastPlayedTrack.artists
+                .map((artist: any) => artist.name)
+                .join(", ")}
             </p>
           </div>
         </div>
       )}
       <div className="footer__center">
-        <ShuffleIcon className="footer__green" />
-        <SkipPreviousIcon className="footer__icon" />
-        <PlayCircleOutlineIcon fontSize="large" className="footer__green" />
-        <SkipNextIcon className="footer__icon" />
-        <RepeatIcon className="footer__green" />
+        <div className="footer__centerIcons">
+          <ShuffleIcon className="footer__icon" />
+          <SkipPreviousIcon className="footer__icon" />
+          <PlayCircleOutlineIcon fontSize="large" className="footer__icon" />
+          <SkipNextIcon className="footer__icon" />
+          <RepeatIcon className="footer__icon" />
+        </div>
+        <Playbar {...lastPlayedTrack} />
       </div>
       <div className="footer__right">
         <Grid container spacing={2}>

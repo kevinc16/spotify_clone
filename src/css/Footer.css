@@ -34,13 +34,17 @@
   color: #dedede;
 }
 
-.footer__green {
+/* .footer__green {
   color: #1ed15e;
-}
+} */
 
 .footer__center {
   flex: 0.4;
-  padding: 0 100px;
+}
+
+.footer__centerIcons {
+  /* flex: 0.4; */
+  padding: 0 160px;
   color: white;
   display: flex;
   align-items: center;

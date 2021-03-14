@@ -40,6 +40,7 @@ function Body() {
             </div>
             {/* list of songs */}
             {firstPlaylist.tracks.items.map((item) => {
+              // add onclick to change songs
               return <SongRow track={item.track} key={item.track.id} />;
             })}
           </div>
