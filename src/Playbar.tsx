@@ -2,6 +2,10 @@ import { Input, Slider } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import "./css/Playbar.css";
 
+import SpotifyPlayer from "react-spotify-web-playback";
+import { useDataLayerValue } from "./DataLayerProvider";
+import { spotify } from "./App";
+
 const computeTime = (time: any) => {
   const sec = Math.floor(time % 60);
   const min = Math.floor(time / 60);
@@ -27,6 +31,8 @@ function Playbar(track: SpotifyApi.TrackObjectFull) {
   const [time, setTime] = useState<any>(0);
   const [maxTime, setMaxTime] = useState(0);
 
+  const { state, dispatch } = useDataLayerValue();
+
   const handleSliderChange = (event: any, newValue: number | number[]) => {
     setTime(newValue);
   };
@@ -37,7 +43,7 @@ function Playbar(track: SpotifyApi.TrackObjectFull) {
 
   return (
     <div className="playbar">
-      {computeTime(time)}
+      {/* {computeTime(time)}
       <Slider
         value={typeof time === "number" ? time : 0}
         onChange={handleSliderChange}
@@ -45,7 +51,14 @@ function Playbar(track: SpotifyApi.TrackObjectFull) {
         max={maxTime}
         className="playbar__main"
       />
-      {computeTime(maxTime)}
+      {computeTime(maxTime)} */}
+      <SpotifyPlayer
+        token={state.token}
+        styles={{
+          bgColor: "#282828",
+          color: "white",
+        }}
+      />
     </div>
   );
 }

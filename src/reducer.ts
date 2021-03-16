@@ -12,6 +12,7 @@ export interface IInitialState {
   //   | SpotifyApi.TrackObjectFull
   //   | null;
   lastPlayedTrack: any;
+  premium: boolean;
 }
 
 interface ISetUser {
@@ -41,12 +42,18 @@ interface ISetLastPlayedTrack {
   type: "SET_LAST_PLAYED_TRACK";
 }
 
+interface ISetPremium {
+  premium: boolean;
+  type: "SET_PREMIUM";
+}
+
 export type Actions =
   | ISetUser
   | ISetToken
   | ISetPlaylists
   | ISetFirstPlaylist
-  | ISetLastPlayedTrack;
+  | ISetLastPlayedTrack
+  | ISetPremium;
 
 export const initialState: IInitialState = {
   token: "",
@@ -56,6 +63,7 @@ export const initialState: IInitialState = {
   // item: null,
   firstPlaylist: null,
   lastPlayedTrack: null,
+  premium: false,
 };
 
 export const reducer = (state: IInitialState, action: Actions) => {
@@ -86,6 +94,11 @@ export const reducer = (state: IInitialState, action: Actions) => {
       return {
         ...state,
         lastPlayedTrack: action.lastPlayedTrack,
+      };
+    case "SET_PREMIUM":
+      return {
+        ...state,
+        lastPlayedTrack: action.premium,
       };
     default:
       console.log("nothing");

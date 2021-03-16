@@ -11,7 +11,8 @@ import RepeatIcon from "@material-ui/icons/Repeat";
 import { Grid, Slider } from "@material-ui/core";
 import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
 import VolumeDownIcon from "@material-ui/icons/VolumeUp";
-import Playbar from "./Playbar";
+// import Playbar from "./Playbar";
+import SpotifyPlayer from "react-spotify-web-playback";
 
 // to play the song - https://developer.spotify.com/documentation/web-playback-sdk/quick-start/
 
@@ -40,16 +41,27 @@ function Footer() {
       )}
       <div className="footer__center">
         <div className="footer__centerIcons">
-          <ShuffleIcon className="footer__icon" />
+          {/* <ShuffleIcon className="footer__icon" />
           <SkipPreviousIcon className="footer__icon" />
           <PlayCircleOutlineIcon fontSize="large" className="footer__icon" />
           <SkipNextIcon className="footer__icon" />
-          <RepeatIcon className="footer__icon" />
+          <RepeatIcon className="footer__icon" /> */}
+          {state.premium ? (
+            <SpotifyPlayer
+              token={state.token}
+              styles={{
+                bgColor: "#282828",
+                color: "white",
+              }}
+            />
+          ) : (
+            <p style={{textAlign:"center", minWidth:"200px"}}>Can't play songs because you don't have premium :c</p>
+          )}
         </div>
-        <Playbar {...lastPlayedTrack} />
+        {/* <Playbar {...lastPlayedTrack} /> */}
       </div>
       <div className="footer__right">
-        <Grid container spacing={2}>
+        {/* <Grid container spacing={2}>
           <Grid item>
             <PlaylistPlayIcon />
           </Grid>
@@ -59,7 +71,7 @@ function Footer() {
           <Grid item xs>
             <Slider className="footer__volumeSlider" />
           </Grid>
-        </Grid>
+        </Grid> */}
       </div>
     </div>
   );

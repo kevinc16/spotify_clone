@@ -25,6 +25,10 @@
   object-fit: contain;
 }
 
+.footer__songInfo {
+  min-width: 140px;
+}
+
 .footer__songInfo > h4 {
   margin-bottom: 5px;
 }

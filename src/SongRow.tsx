@@ -1,3 +1,4 @@
+import { spotify } from "./App";
 import "./css/SongRow.css";
 import { useDataLayerValue } from "./DataLayerProvider";
 
@@ -9,6 +10,7 @@ function SongRow({ track }: ISongRowProps) {
   const { state, dispatch } = useDataLayerValue();
 
   const handleChangeSong = () => {
+    // spotify.play();
     dispatch({ type: "SET_LAST_PLAYED_TRACK", lastPlayedTrack: track });
   };
 

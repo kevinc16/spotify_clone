@@ -30,6 +30,11 @@ function App() {
 
       spotify.getMe().then((user) => {
         dispatch({ type: "SET_USER", user });
+        if (user.product === "premium") {
+          dispatch({ type: "SET_PREMIUM", premium: true });
+        } else {
+          dispatch({ type: "SET_PREMIUM", premium: false });
+        }
       });
 
       spotify.getUserPlaylists().then((playlists) => {
@@ -45,6 +50,8 @@ function App() {
         const lastTrack = listOfTracks.items[0].track;
         dispatch({ type: "SET_LAST_PLAYED_TRACK", lastPlayedTrack: lastTrack });
       });
+
+      // spotify.play();
     }
   }, []);
 
